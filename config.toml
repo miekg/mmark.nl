@@ -1,16 +1,20 @@
 baseURL = "https://mmark.nl/"
 languageCode = "en-us"
-title = "mmark is a powerful markdown parser"
+title = "Mmark: powerful markdown parser"
 theme = "hugo-theme-sam"
 
 [[params.mainMenu]]
-    link = "/mmark"
-    text = "mmark is a powerful markdown parser"
-
-[[params.mainMenu]]
-    link = "/plan"
-    text = "Plan for the v2 rewrite"
+    link = "https://github.com/miekg/mmark"
+    text = "Mmark"
 
 [[params.mainMenu]]
     link = "/about"
+    text = "A powerful markdown parser"
+
+[[params.mainMenu]]
+    link = "/plan"
+    text = "Plan for version 2"
+
+[[params.mainMenu]]
+    link = "https://groups.google.com/forum/#!forum/mmark-discuss"
     text = "Join the mailing list"
