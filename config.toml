@@ -1,4 +1,16 @@
-baseURL = "http://example.org/"
+baseURL = "https://mmark.nl/"
 languageCode = "en-us"
-title = "My New Hugo Site"
-theme = themes/hugo-theme-sam
+title = "mmark is a powerful markdown parser"
+theme = "hugo-theme-sam"
+
+[[params.mainMenu]]
+    link = "/mmark"
+    text = "mmark is a powerful markdown parser"
+
+[[params.mainMenu]]
+    link = "/plan"
+    text = "Plan for the v2 rewrite"
+
+[[params.mainMenu]]
+    link = "/about"
+    text = "Join the mailing list"
