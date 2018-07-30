@@ -18,3 +18,7 @@ theme = "hugo-theme-sam"
 [[params.mainMenu]]
     link = "https://groups.google.com/forum/#!forum/mmark-discuss"
     text = "Join the mailing list"
+
+[[params.mainMenu]]
+    link = "/syntax"
+    text = "Syntax"
