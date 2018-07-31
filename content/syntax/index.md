@@ -29,11 +29,12 @@ complete books. It <strike>steals</strike> borrows syntax elements from [pandoc]
 [CommonMark]: http://commonmark.org/
 [Scholarly markdown]: http://scholarlymarkdown.com/Scholarly-Markdown-Guide.html
 
-This document is loosely based on the excellent syntax document from
-[kramdown](http://kramdown.gettalong.org/syntax.html) and
-[pandoc](http://pandoc.org/README.html).
-
 There are separate documents on how to tailor the output for I-D or HTML5.
+
+The following extensions are supported:
+
+* extensions1
+* extensions2
 
 ### Stuff for XML output
 
