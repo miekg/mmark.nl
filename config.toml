@@ -4,20 +4,12 @@ title = "Mmark: powerful markdown parser"
 theme = "hugo-theme-sam"
 
 [[params.mainMenu]]
-    link = "https://github.com/miekg/mmark"
-    text = "Mmark"
-
-[[params.mainMenu]]
     link = "/about"
-    text = "A powerful markdown parser"
+    text = "Mmark is a powerful markdown parser"
 
 [[params.mainMenu]]
     link = "/plan"
     text = "Plan for version 2"
-
-[[params.mainMenu]]
-    link = "https://groups.google.com/forum/#!forum/mmark-discuss"
-    text = "Join the mailing list"
 
 [[params.mainMenu]]
     link = "/syntax"

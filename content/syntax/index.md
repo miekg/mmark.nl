@@ -416,12 +416,10 @@ Once a citation has been defined (i.e. the reference anchor is known to Mmark) y
 
 Multiple citation can separated with a semicolon: `[@RFC1034; @RFC1035]`.
 
-## Short References
+## Cross References
 
-> TODO TODO
-
-Internal references use the syntax `[](#id)`, usually the need for the title within the brackets is
-not needed, so Mmark has the shorter syntax `(#id)` to cross reference in the document.
+Cross references can use the syntax `[](#id)`, but usually the need for the title within the
+brackets is not needed, so Mmark has the shorter syntax `(#id)` to cross reference in the document.
 
 Example:
 
