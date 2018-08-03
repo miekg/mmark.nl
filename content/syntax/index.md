@@ -4,7 +4,35 @@ date: 2018-07-22T14:05:51+01:00
 draft: false
 ---
 
-# Syntax
+# Syntax of Mmark2
+
+This is version 2 of Mmark a new implementation and some langauge changes as well. We think these
+language changes lead to a more consistent user experience and less confusion.
+
+## Coming from Mmark1
+
+These are the changes (not some of the dropped item can come back if someone steps up and implements
+it).
+
+* Caption under tables, figure, quotes and code block are now *always* done with `Caption: `. No
+  more Table, Quote, and Figure.
+* Citations:
+   * suppressing a citation is now done with `[@-ref]` (it was the reverse in v1), this is more consistent.
+   * multiple citation are allowed in one `[@ref1; @ref2]`, separate with semicolon.
+   * reference text is allowed `[@ref p. 23]`.
+* Indices: now just done with `(!item)`, marking one primary will be: `(!!item)`.
+* Including files with a prefix is now specified in the address specification:
+  `{{myfile}}[prefix="C: "]` will use `C: ` is the prefix. No more mucking about with block
+  attribute list that are hard to discover.
+* Code block call outs are now a renderer setting. The use of block level attributes is dropped here
+  as well.
+* Title Blocks needs to be sandwiched between `%%%`, the prefix `%` does not work anymore.
+* HTML Attribute support is dropped.
+* The different list syntaxes have been dropped, use the Block Level Attribute to tweak the output.
+* Tasks lists: dropped
+* Comment detection, i.e. to support `cref`: dropped.
+* Extended table syntax: on the TODO for now.
+
 
 See [this document](https://github.com/miekg/mmark/wiki/Syntax) for the current syntax of Mmark. For
 mmark2 this will be slightly changed and streamlined.
@@ -59,17 +87,6 @@ as an `<bcp14>` element: i.e. `**MUST**` becomes `<bcp14>MUST</bcp14>`.
 ### Stuff for HTML5 output
 
 Nothing yet.
-
-## Changes from V1
-
-* Extended tables syntax.
-* Including files.
-* Title Blocks needs to be sandwiched between `%%%`, the prefix `%` does not work anymore.
-* Prefix block attribute has been dropped.
-* Comment detection has been dropped.
-* Different list syntax; use block attribute `type="aaa"`.
-* Task lists: dropped
-* abbreviations: dropped
 
 # Mmark V2 Syntax
 
@@ -269,6 +286,7 @@ And for a quote:
 The caption extends to the first *empty* line.
 
 ### Asides
+
 Any text prefixed with `A>` will become an
 [aside](https://developer.mozilla.org/en/docs/Web/HTML/Element/aside). This is similar to a block
 quote.
@@ -391,30 +409,27 @@ will do this.
 
 ### Indices
 
-Defining indices allows you to create an index. The define an index use the `(((item, subitem)))`
-syntax. To make `item` primary, use an `!`: `(((!item, subitem)))`. Just `(((item)))` is allowed as
-well.
+Defining indices allows you to create an index. The define an index use the `(!item)`. Sub items
+can be added as well, with `(!item; subitem)`.
+To make `item` primary, use another `!`: `(!!item, subitem)`.
 
 ### Citations
 
 Mmark uses the citation syntax from Pandoc: `[@RFC2535]`, the citation can either be
 informative (default) or normative, this can be indicated by using the `?` or `!` modifier:
-`[@!RFC2535]`. Use `[-@RFC1000]` to add the citation to the references, but suppress the output in
+`[@!RFC2535]`. Use `[@-RFC1000]` to add the citation to the references, but suppress the output in
 the document.
 
 The "highest" modifier seen determines the final type, i.e. once a citation is declared normative it
 will stay normative, but informative one will be "upgraded" to normative.
 
-If you reference an RFC or I-D the reference will be added automatically.
+Multiple citation can separated with a semicolon: `[@RFC1034; @RFC1035]`.
 
+If you reference an RFC or I-D the reference will be added automatically.
 For I-Ds you may want to add a draft sequence number, which can be done as such: `[@?I-D.blah#06]`.
 If you reference an I-D *without* a sequence number it will create a reference to the *last* I-D in
 citation index.
 
-Once a citation has been defined (i.e. the reference anchor is known to Mmark) you can use
-`@RFC2535` as a shortcut for the citation.
-
-Multiple citation can separated with a semicolon: `[@RFC1034; @RFC1035]`.
 
 ## Cross References
 
