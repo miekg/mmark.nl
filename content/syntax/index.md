@@ -6,19 +6,19 @@ draft: false
 
 # Syntax of Mmark2
 
-This is version 2 of Mmark a new implementation and some langauge changes as well. We think these
+This is version 2 of Mmark: a new implementation and some language changes as well. We think these
 language changes lead to a more consistent user experience and less confusion.
 
-## Coming from Mmark1
+## Changes from Mmark1
 
 These are the changes (not some of the dropped item can come back if someone steps up and implements
 it).
 
 * Caption under tables, figure, quotes and code block are now *always* done with `Caption: `. No
-  more Table, Quote, and Figure.
+  more `Table: `, `Quote: `, and `Figure: `.
 * Citations:
-   * suppressing a citation is now done with `[@-ref]` (it was the reverse in v1), this is more consistent.
-   * multiple citation are allowed in one `[@ref1; @ref2]`, separate with semicolon.
+   * suppressing a citation is now done with `[@-ref]` (it was the `-@` in v1), this is more consistent.
+   * multiple citation are allowed in one `[@ref1; @ref2]`. Separate with semicolons.
    * reference text is allowed `[@ref p. 23]`.
 * Indices: now just done with `(!item)`, marking one primary will be: `(!!item)`.
 * Including files with a prefix is now specified in the address specification:
@@ -26,16 +26,13 @@ it).
   attribute list that are hard to discover.
 * Code block call outs are now a renderer setting. The use of block level attributes is dropped here
   as well.
-* Title Blocks needs to be sandwiched between `%%%`, the prefix `%` does not work anymore.
+* Title Block need to be sandwiched between `%%%`, the prefix `%` does not work anymore.
 * HTML Attribute support is dropped.
 * The different list syntaxes have been dropped, use the Block Level Attribute to tweak the output.
+  This does require
 * Tasks lists: dropped
 * Comment detection, i.e. to support `cref`: dropped.
 * Extended table syntax: on the TODO for now.
-
-
-See [this document](https://github.com/miekg/mmark/wiki/Syntax) for the current syntax of Mmark. For
-mmark2 this will be slightly changed and streamlined.
 
 This document describes all the *extra* syntax elements that can be used in Mmark. Mmark's syntax is
 based on the ["standard" Markdown syntax](https://daringfireball.net/projects/markdown/syntax).
@@ -57,36 +54,46 @@ complete books. It <strike>steals</strike> borrows syntax elements from [pandoc]
 [CommonMark]: http://commonmark.org/
 [Scholarly markdown]: http://scholarlymarkdown.com/Scholarly-Markdown-Guide.html
 
-There are separate documents on how to tailor the output for I-D or HTML5.
-
-The following extensions are supported:
+The following extensions are enabled by default:
 
 * extensions1
 * extensions2
 
-### Stuff for XML output
+### RFC 7991 XML Output
 
-If the document has a [title block](#title-block) the front matter is already open. Closing the
-front matter can only be done by starting the main matter with `{mainmatter}`. Any open "matters"
-are closed when the document ends.
+This is the output format used for generating Internet-Drafts and RFCs. The generated XML needs to
+be processed by another tool (xml2rfc) to generate to offical (final) output. The XML from *mmark*
+can be used directly to upload to the IETF tools website.
 
-Special Headers: Note that the header name
-must be (when lowercased) equal to "abstract".
+Title Block:
+:   If the document has a [title block](#title-block) the front matter is already open. Closing the
+    front matter can only be done by starting the middle matter with `{mainmatter}`. Any open
+    "matters" are closed when the document ends.
 
-`.# Preface` is another special header that is supported.
+Abstract:
+:   The abstract can be started by using the special header syntax `.# Abstract`
 
-If you use a special header and the name is not "Abstract" or "Preface" it is considered a
-[note](https://tools.ietf.org/html/rfc7749#section-2.24): a numberless section.
+Note:
+:   Any special header that is not "abstract" or "preface" will be a
+    [note](https://tools.ietf.org/html/rfc7749#section-2.24): a numberless section.
 
-* BCP 14/RFC 2119 Keywords
+BCP 14/RFC 2119 Keywords:
+:   If an RFC 2119 word is found enclosed in `**` it will be rendered
+    as an `<bcp14>` element: i.e. `**MUST**` becomes `<bcp14>MUST</bcp14>`.
 
-If an RFC 2119 word is found enclosed in `**` it will be rendered
-as an `<bcp14>` element: i.e. `**MUST**` becomes `<bcp14>MUST</bcp14>`.
+Artwork:
+:   Artwork is added by using a (fenced) code block. If the code block has an caption it will be
+    wrapped in a `<figure>`, this is true for source code as well.
 
-
-### Stuff for HTML5 output
-
-Nothing yet.
+Source code:
+:   If you want to typeset a source code instead of an artwork you must specify a language to the
+    fenced block:
+    ~~~
+    ``` go
+    println(hello)
+    ````
+    ~~~
+    Will be typesets as source code with the language set go `go`.
 
 # Mmark V2 Syntax
 
@@ -108,14 +115,6 @@ title = "Foo Bar"
 %%%
 ~~~
 Indentation does not matter, so this is also legal:
-
-~~~
-%%%
-    title = "My Awesome Title"
-%%%
-~~~
-
-Doing so make the title block look better in Github (which does not know how to render such a block).
 
 ### Elements of the Title Block
 
@@ -162,21 +161,6 @@ organization = "Atoom"
 
 An `#` acts as a comment in this block. TOML itself is specified [here](https://github.com/toml-lang/toml).
 
-##### PIs
-
-PI, stands "Process Instruction" and are an XML hack to enable/disable some features. Mmark
-supports a subset of them:
-~~~
-toc, symrefs, sortrefs, compact, subcompact, private, topblock, header, footer, comments
-~~~
-
-PIs can be enabled in the title block, like so:
-~~~
-[pi]
-toc = "no"
-compact = "yes"
-~~~
-
 ### Including Files
 
 Including other files can done be with `{{filename}}`, if the path of `filename` is *not* absolute,
@@ -197,8 +181,7 @@ Mmark adds another feature namely adding prefix which specifies a string
 that should be applied to each line read from the file. This is done via an
 [Inline Block Attribute](#inline-attribute-lists).
 ~~~
-{prefix="C: "]
-{{filename}}[3,4]
+{{filename}}[3,4, prefix="C: "]
 ~~~
 Read lines 3 and 4 from `filename` and prefixes each line with `C: `.
 
@@ -220,6 +203,8 @@ interesting_code = fascinating_function()
 Will only include the code between the `/START OMIT/` and `/END OMIT/`.
 
 ### Including code fragments
+
+* Always source code.
 
 Using the syntax: `<{{code/hello.c}}[address]`, the file `code/hello.c` will be included into the
 document as a code block. The `address` is identical to the normal include. The only difference with
@@ -248,25 +233,19 @@ A new part is started with `-# PartName`
 Specifying a part ID can be done with `-# PartName {#part1}` as is normal [for
 headings](https://daringfireball.net/projects/markdown/syntax#header).
 
-### Special Headers; Notes and Abstracts
-
-In some output formats (notably the IETF ones), the abstract is important and typeset differently.
-In Mmark you signify it by using the special header syntax: `.# Abstract`.
-
-IDs (`{#id}`) after the title are supported.
-
 ## Captions
 
 Mmark supports caption below [tables](#tables), [code blocks](#code-blocks) and [block quotes](#block-quotes).
-Each of the elements has their own caption string: `Table:`, `Figure:` and `Quote:` respectively.
-For a table:
+You can caption each elements with `Caption: `.
+The caption extends to the first *empty* line.
+Some examples:
 
 ~~~
 Name    | Age
 --------|-----:
 Bob     | 27
 Alice   | 23
-Table: This is the table caption.
+Caption: This is the table caption.
 ~~~
 
 Or for a code block:
@@ -276,14 +255,12 @@ Or for a code block:
          return true
      }
      ~~~
-     Figure: This is a caption for a code block.
+     Caption: This is a caption for a code block.
 
 And for a quote:
 
      > Ability is nothing without opportunity.
-     Quote: https://example.com, Napoleon Bonaparte
-
-The caption extends to the first *empty* line.
+     Caption: https://example.com, Napoleon Bonaparte
 
 ### Asides
 
@@ -369,10 +346,7 @@ Figure: Caption for both figures in v3 (in v2 this is ignored).
 
 #### Styling Lists
 
-If you need to style a list beyond what is possible, you can use a IAL:
-`{style="format (%I)" type="(%I)"}`. This IAL is somewhat special as 'format' is used for XMLv2
-output and 'type' for XMLv3. The *not*-used IAL is filtered out because otherwise that would lead
-to XML validation failures.
+> TODO TODO TODO
 
 ### Block Tables
 
@@ -380,10 +354,10 @@ to XML validation failures.
 
 ### XML References
 
-Any XML reference fragment included *before* the back matter, can be used as a citation reference.
+Any XML reference fragment included anywhere in the document, can be used as a citation reference.
 The syntax of the XML reference element is defined in [RFC
 7749](https://tools.ietf.org/html/rfc7749#section-2.30). The `anchor` defined can be used in the
-citation, in the example below that would be `[@pandoc]`.
+citation, in the example below that would be `[@pandoc]`, which would make it a normative reference.
 
 ~~~
 <reference anchor='pandoc' target='http://johnmacfarlane.net/pandoc/'>
@@ -420,16 +394,15 @@ informative (default) or normative, this can be indicated by using the `?` or `!
 `[@!RFC2535]`. Use `[@-RFC1000]` to add the citation to the references, but suppress the output in
 the document.
 
-The "highest" modifier seen determines the final type, i.e. once a citation is declared normative it
-will stay normative, but informative one will be "upgraded" to normative.
+The last seen modifier determines the final type.
 
 Multiple citation can separated with a semicolon: `[@RFC1034; @RFC1035]`.
 
 If you reference an RFC or I-D the reference will be added automatically.
+
 For I-Ds you may want to add a draft sequence number, which can be done as such: `[@?I-D.blah#06]`.
 If you reference an I-D *without* a sequence number it will create a reference to the *last* I-D in
 citation index.
-
 
 ## Cross References
 
@@ -460,7 +433,8 @@ subscripts, use `P~a\ cat~`, not `P~a cat~`.
 
 ## Links and Images
 
-Three types of links are supported: automatic links, inline links and reference links.
+Normal markdown synax.
+SVG TODO
 
 ## Block Attribute Lists
 
