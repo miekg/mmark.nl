@@ -17,9 +17,9 @@ it).
 * Caption under tables, figure, quotes and code block are now *always* done with `Caption: `. No
   more `Table: `, `Quote: `, and `Figure: `.
 * Citations:
-   * suppressing a citation is now done with `[@-ref]` (it was the `-@` in v1), this is more consistent.
-   * multiple citation are allowed in one `[@ref1; @ref2]`. Separate with semicolons.
-   * reference text is allowed `[@ref p. 23]`.
+   * Suppressing a citation is now done with `[@-ref]` (it was the `-@` in v1), this is more consistent.
+   * Multiple citation are allowed in one `[@ref1; @ref2]`. Separate with semicolons.
+   * Reference text is allowed `[@ref p. 23]`.
 * Indices: now just done with `(!item)`, marking one primary will be: `(!!item)`.
 * Including files with a prefix is now specified in the address specification:
   `{{myfile}}[prefix="C: "]` will use `C: ` is the prefix. No more mucking about with block
@@ -31,7 +31,7 @@ it).
 * The different list syntaxes have been dropped, use the Block Level Attribute to tweak the output.
   This does require
 * Tasks lists: dropped
-* Comment detection, i.e. to support `cref`: dropped.
+* Comment detection, i.e. to support `cref`: dropped. Comments *are* **NOT** copied into the XML.
 * Extended table syntax: on the TODO for now.
 
 This document describes all the *extra* syntax elements that can be used in Mmark. Mmark's syntax is
@@ -62,7 +62,7 @@ The following extensions are enabled by default:
 ### RFC 7991 XML Output
 
 This is the output format used for generating Internet-Drafts and RFCs. The generated XML needs to
-be processed by another tool (xml2rfc) to generate to offical (final) output. The XML from *mmark*
+be processed by another tool (xml2rfc) to generate to official (final) output. The XML from *mmark*
 can be used directly to upload to the IETF tools website.
 
 Title Block:
@@ -116,7 +116,7 @@ title = "Foo Bar"
 ~~~
 Indentation does not matter, so this is also legal:
 
-### Elements of the Title Block
+#### Elements of the Title Block
 
 An I-D needs to have a Title Block with the following items filled out:
 
@@ -224,14 +224,6 @@ Mmark support three document divisions, front matter, main matter and the back m
 automatically starts the front matter for you *if* the document has a title block. Switching
 divisions can be done with `{frontmatter}`, `{mainmatter}` and `{backmatter}`. This must be the only
 thing on the line.
-
-### Parts
-
-Starting a new part of the document is similar to starting a new section, the syntax reflects that.
-A new part is started with `-# PartName`
-
-Specifying a part ID can be done with `-# PartName {#part1}` as is normal [for
-headings](https://daringfireball.net/projects/markdown/syntax#header).
 
 ## Captions
 
@@ -354,10 +346,10 @@ Figure: Caption for both figures in v3 (in v2 this is ignored).
 
 ### XML References
 
-Any XML reference fragment included anywhere in the document, can be used as a citation reference.
+Any valid XML reference fragment found anywhere in the document, can be used as a citation reference.
 The syntax of the XML reference element is defined in [RFC
 7749](https://tools.ietf.org/html/rfc7749#section-2.30). The `anchor` defined can be used in the
-citation, in the example below that would be `[@pandoc]`, which would make it a normative reference.
+[citation](#Citations), which the example below that would be `[@pandoc]`:
 
 ~~~
 <reference anchor='pandoc' target='http://johnmacfarlane.net/pandoc/'>
@@ -391,14 +383,15 @@ To make `item` primary, use another `!`: `(!!item, subitem)`.
 
 Mmark uses the citation syntax from Pandoc: `[@RFC2535]`, the citation can either be
 informative (default) or normative, this can be indicated by using the `?` or `!` modifier:
-`[@!RFC2535]`. Use `[@-RFC1000]` to add the citation to the references, but suppress the output in
-the document.
+`[@!RFC2535]`. To suppress a citation use `[@-RFC1000]`. It will still be added the citation to the
+references, but not show up in the document.
 
-The last seen modifier determines the final type.
+The first seen modifier determines the type (suppressed, normative or informative).
 
 Multiple citation can separated with a semicolon: `[@RFC1034; @RFC1035]`.
 
-If you reference an RFC or I-D the reference will be added automatically.
+If you reference an RFC or I-D the reference will be added automatically (no need to muck about
+with an `<reference>` block.
 
 For I-Ds you may want to add a draft sequence number, which can be done as such: `[@?I-D.blah#06]`.
 If you reference an I-D *without* a sequence number it will create a reference to the *last* I-D in
@@ -438,6 +431,8 @@ SVG TODO
 
 ## Block Attribute Lists
 
+TODO: better text here.
+
 This block-level element is used to attach attributes to another block-level element. An IAL
 has to be put directly before a block-level element of which the attributes should be attached.
 The full syntax is: `{#id .class key="value"}`. Values may be omitted `{.class}` is valid
@@ -456,8 +451,7 @@ next element that *does* use the IAL!
 Here are some examples for IALs:
 
 ~~~
-{title="The blockquote title"}
-{#myid}
+{title="The blockquote title" #myid}
 > A blockquote with a title
 
 {.go}
