@@ -27,3 +27,9 @@ theme = "after-dark"
     weight = 3
     identifier = "about"
     url = "/post/about"
+
+[[menu.Main]]
+    name = "Github"
+    weight = 4
+    identifier = "github"
+    url = "https://github.com/mmarkdown/mmark"

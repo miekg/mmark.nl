@@ -20,3 +20,6 @@ It also allows for writing large documents such as technical books, like the
 
 Mmark uses [gomarkdown](https://github.com/gomarkdown/markdown) which is a fork of
 [blackfriday](https://github.com/russross/blackfriday/).
+
+If you like Go and parsing text, drop me a line if you want to be part of the *Mmarkdown* Github
+org, and help develop Mmark!
