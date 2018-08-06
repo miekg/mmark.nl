@@ -6,30 +6,30 @@ aliases: [/about/]
 
 # Syntax of Mmark2
 
-This is version 2 of Mmark: a [new implementation](https://github.com/mmarkdown/markdown)
+This is version 2 of [Mmark](https://github.com/mmarkdown/mmark):
+based on a [new markdown implementation](https://github.com/mmarkdown/markdown)
 and some (small) language changes as well. We think these language changes lead to a more consistent
 user experience and lead to less confusion.
 
 ## Changes from Mmark1
 
-These are the changes from Mmark1:
+These are the changes from Mmark version 1:
 
 * Caption under tables, figure, quotes and code block are now *always* done with `Caption: `. No
   more `Table: `, `Quote: `, and `Figure: `.
 * Citations:
    * Suppressing a citation is now done with `[@-ref]` (it was the reverse `-@` in v1), this is more consistent.
-   * Multiple citation are allowed in one `[@ref1; @ref2]`. Separate with semicolons.
+   * Multiple citation are allowed in one go, separated with a semicolons: `[@ref1; @ref2]`.
    * **TODO** Reference text is allowed `[@ref p. 23]`.
 * **TODO** Indices: now just done with `(!item)`, marking one primary will be: `(!!item)`.
 * **TODO** Including files with a prefix is now specified in the address specification:
-  `{{myfile}}[prefix="C: "]` will use `C: ` is the prefix. No more mucking about with block
-  attribute list that are hard to discover.
+  `{{myfile}}[prefix="C: "]` will use `C: ` as the prefix. No more mucking about with block
+  attribute lists that are hard to discover.
 * **TODO** Extended table syntax.
 * Code block call outs are now a renderer setting, not a block level attribute.
 * Title Block need to be sandwiched between `%%%`, the prefix `%` does not work anymore.
 * HTML Attribute support is dropped.
 * The different list syntaxes have been dropped, use the Block Level Attribute to tweak the output.
-  This does require
 * Tasks lists: dropped
 * Comment detection, i.e. to support `cref`: dropped. Comments *are* **NOT** copied into the XML.
 

@@ -6,12 +6,12 @@ aliases: [/about/]
 
 # About Mmark
 
-Mmark is a powerful markdown processor written in Go geared towards writing IETF documents. It is,
+Mmark is a powerful markdown processor written in Go, geared towards writing IETF documents. It is,
 however, *also* suited for writing books and other technical documentation.
 
 You can write RFCs using markdown, it provides an advanced markdown dialect that processes
 file(s) to produce internet-drafts in XML [RFC 7991](https://tools.ietf.org/html/rfc7991)
-format. Mmark can produce XML2RFC (aforementioned RFC 7991) v3 and HTML5 output.
+format. Mmark can produce XML2RFC (aforementioned RFC 7991) and HTML5 output.
 
 Example documents can be [found here](https://github.com/mmarkdown/mmark/tree/master/rfc).
 
