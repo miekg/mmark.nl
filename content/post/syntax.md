@@ -4,8 +4,6 @@ date: 2018-07-22T14:05:51+01:00
 aliases: [/about/]
 ---
 
-# Syntax of Mmark2
-
 This is version 2 of [Mmark](https://github.com/mmarkdown/mmark):
 based on a [new markdown implementation](https://github.com/mmarkdown/markdown)
 and some (small) language changes as well. We think these language changes lead to a more consistent

@@ -4,8 +4,6 @@ date: 2018-07-22T14:05:51+01:00
 aliases: [/about/]
 ---
 
-# About Mmark
-
 Mmark is a powerful markdown processor written in Go, geared towards writing IETF documents. It is,
 however, *also* suited for writing books and other technical documentation.
 
