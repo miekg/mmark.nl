@@ -386,10 +386,11 @@ To make `item` primary, use another `!`: `(!!item, subitem)`.
 
 ### Citations
 
-Mmark uses the citation syntax from Pandoc: `[@RFC2535]`, the citation can either be
-informative (default) or normative, this can be indicated by using the `?` or `!` modifier:
-`[@!RFC2535]`. To suppress a citation use `[@-RFC1000]`. It will still be added the citation to the
-references, but not show up in the document.
+Mmark uses the citation syntax from Pandoc (and extends it): `[@RFC2535]`, the citation can either
+be informative (default) or normative, this can be indicated by using the `?` or `!` modifier:
+`[@!RFC2535]` create a normative reference for RFC 2535. To suppress a citation use `[-@RFC1000]`.
+It will still add the citation to the references, but does not show up in the document as
+a citation.
 
 The first seen modifier determines the type (suppressed, normative or informative).
 
@@ -434,7 +435,7 @@ subscripts, use `P~a\ cat~`, not `P~a cat~`.
 Normal markdown synax.
 **SVG TODO and maybe new syntax**
 
-## Block Attribute Lists
+## Block Attribute
 
 **TODO**: better text here.
 **TODO**: drop use of ial
