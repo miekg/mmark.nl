@@ -169,57 +169,32 @@ An `#` acts as a comment in this block. TOML itself is specified [here](https://
 ### Including Files
 
 Including other files can done be with `{{filename}}`, if the path of `filename` is *not* absolute,
-the filename is taken relative to *working directory* of the Mmark process. With `<{{filename}}`
-your include filename as a code block. The main difference is that this include will be wrapped in
-a code block.
+the filename is taken relative to *current file*. With `<{{filename}}`
+you include filename as a code block, i.e. the main difference being it will be returned as a code
+block. The file's extension *will be used* as the language.
 
 The include may optionally be followed by a address specification in block quotes. This can detail
 what lines to include, use a string to prefix each lines and more. For instance:
 ~~~
-{{filename}}[3,4]
+{{filename}}[3,5]
 ~~~
 
-Only includes the lines 3 to 4 into the current document. The address syntax is described in
-<https://godoc.org/golang.org/x/tools/present/>.
+Only includes the lines 3 to (*not* inclusive) 5 into the current document.
+
+**TODO** describe complete syntax
 
 Mmark adds another feature namely adding prefix which specifies a string
 that should be applied to each line read from the file. This is done via an
 [Inline Block Attribute](#inline-attribute-lists).
 ~~~
-{{filename}}[3,4, prefix="C: "]
+{{filename}}[3,4; prefix="C: "]
 ~~~
 Read lines 3 and 4 from `filename` and prefixes each line with `C: `.
-
-The `OMIT` syntax in the address specification also works:
-
-~~~
-{{test.go}}[/START OMIT/,/END OMIT/]
-~~~
-
-Where `test.go` looks like this:
-
-``` go
-tedious_code = boring_function()
-// START OMIT
-interesting_code = fascinating_function()
-// END OMIT
-```
-
-Will only include the code between the `/START OMIT/` and `/END OMIT/`.
-
-### Including code fragments
-
-* Always source code when language is specified.
-
-Using the syntax: `<{{code/hello.c}}[address]`, the file `code/hello.c` will be included into the
-document as a code block. The `address` is identical to the normal include. The only difference with
-a code include is that the text is wrapped in a code block. Mmark will also look at the extension
-and set the language to it, in the above case that would be `c`.
 
 Captioning works as well:
 
 ~~~
-<{{test.go}}[/START OMIT/,/END OMIT/]
+<{{test.go}}[/START/,/END/]
 Figure: A sample function.
 ~~~
 
