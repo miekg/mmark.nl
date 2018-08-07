@@ -187,7 +187,7 @@ Mmark adds another feature namely adding prefix which specifies a string
 that should be applied to each line read from the file. This is done via an
 [Inline Block Attribute](#inline-attribute-lists).
 ~~~
-{{filename}}[3,4; prefix="C: "]
+{{filename}}[3,4 prefix="C: "]
 ~~~
 Read lines 3 and 4 from `filename` and prefixes each line with `C: `.
 
