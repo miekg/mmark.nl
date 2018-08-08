@@ -169,27 +169,27 @@ An `#` acts as a comment in this block. TOML itself is specified [here](https://
 ### Including Files
 
 Including other files can done be with `{{filename}}`, if the path of `filename` is *not* absolute,
-the filename is taken relative to *current file*. With `<{{filename}}`
-you include filename as a code block, i.e. the main difference being it will be returned as a code
-block. The file's extension *will be used* as the language.
+the filename is taken relative to *current file being processed*. With `<{{filename}}`
+you include a file as a code block. The main difference being it will be returned as a code
+block. The file's extension *will be used* as the language. The syntax is:
 
-The include may optionally be followed by a address specification in block quotes. This can detail
-what lines to include, use a string to prefix each lines and more. For instance:
+~~~
+{{pathname}}[address]
+~~~
+And address can be `N,M`, where `N` and `M` are line numbers. Or `/N/,/M/`, where `N` and `M` are
+regular expressions that include from where to where to include the file. Each of these can have
+an optional `prefix=""` specifier.
+
 ~~~
 {{filename}}[3,5]
 ~~~
 
 Only includes the lines 3 to (*not* inclusive) 5 into the current document.
 
-**TODO** describe complete syntax
-
-Mmark adds another feature namely adding prefix which specifies a string
-that should be applied to each line read from the file. This is done via an
-[Inline Block Attribute](#inline-attribute-lists).
 ~~~
-{{filename}}[3,4 prefix="C: "]
+{{filename}}[3,5;prefix="C: "]
 ~~~
-Read lines 3 and 4 from `filename` and prefixes each line with `C: `.
+will include the same lines *and* prefix each include line with `C: `.
 
 Captioning works as well:
 
