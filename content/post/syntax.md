@@ -39,7 +39,7 @@ Syntax that is not supported anymore:
 This document describes all the *extra* syntax elements that can be used in Mmark. Mmark's syntax is
 based on the ["standard" Markdown syntax](https://daringfireball.net/projects/markdown/syntax).
 
-> Read the above document *first!* It helps you understand how markdown looks and feels.
+> Read the above document, it helps you understand how markdown looks and feels.
 
 For the rest we build up on <https://github.com/gomarkdown/markdown> and support all syntax
 [it supports](https://github.com/gomarkdown/markdown/blob/master/README.md). We enable the following
@@ -108,9 +108,10 @@ Source code:
 ### Title Block
 
 A Title Block contains a document's meta data; title, authors, date and other elements. The elements
-that can be specified are copied from the [xml2rfc v2
-standard](https://tools.ietf.org/html/rfc7749). More on these below. The complete title block is
-specified in [TOML](https://github.com/toml-lang/toml).
+that can be specified are copied from the [xml2rfc v3
+standard](https://tools.ietf.org/html/rfc7791). More on these below. The complete title block is
+specified in [TOML](https://github.com/toml-lang/toml). Examples title blocks can be [found in the
+repository of mmark](https://github.com/mmarkdown/mmark/tree/master/rfc).
 
 The title block itself needs three or more `%`'s at the start and end of the block. A minimal title
 block would look like this:
@@ -120,25 +121,25 @@ block would look like this:
 title = "Foo Bar"
 %%%
 ~~~
-Indentation does not matter, so this is also legal:
 
 #### Elements of the Title Block
 
-**TODO**: needs up date for RFC 7991 and a minimal example that we can link to.
-
 An I-D needs to have a Title Block with the following items filled out:
 
-* title
-* abbrev
-* category
-* docName
-* updates/obsoletes
-* ipr
-* area
-* workgroup
-* keyword
-* date
-* author(s) section
+* title - the main title of the document.
+* abbrev - abbreviation of the title.
+* updates/obsoletes - array of integers.
+* seriesInfo, containing
+   * name - `RFC` or `Internet-Draft` or `DOI`
+   * value - draft name or RFC number
+   * stream - `IETF` (default), `IAB`, `IRTF` or `independent`.
+   * status - `standard`, `informational`, `experimental`, `bcp`, `fyi`, or `full-standard`.
+* ipr - usually just set `trust200902`
+* area - usually just `Internet`
+* workgroup - the workgroup the document is created for
+* keyword - array with keywords (optional)
+* author(s) - define all the authors.
+* date - the date for this I-D/RFC.
 
 An example would be:
 
@@ -146,13 +147,17 @@ An example would be:
 %%%
 title = "Using mmark to create I-Ds and RFCs"
 abbrev = "mmark2rfc"
-category = "info"
-docName = "draft-gieben-mmark2rfc-00"
 updates = [1925, 7511]
 ipr= "trust200902"
 area = "Internet"
 workgroup = ""
 keyword = ["markdown", "xml", "mmark"]
+
+[seriesInfo]
+status = "informational"
+name = "Internet-Draft"
+value = "draft-gieben-mmark2rfc-00"
+stream = "IETF"
 
 date = 2014-12-10T00:00:00Z
 
@@ -160,8 +165,7 @@ date = 2014-12-10T00:00:00Z
 initials="R."
 surname="Gieben"
 fullname="R. (Miek) Gieben"
-#role="editor"
-organization = "Atoom"
+organization = "Mmark"
   [author.address]
   email = "miek@miek.nl"
 %%%
@@ -210,10 +214,9 @@ thing on the line.
 
 ## Captions
 
-Mmark supports caption below [tables](#tables), [code blocks](#code-blocks) and [block quotes](#block-quotes).
-You can caption each elements with `Caption: `.
-The caption extends to the first *empty* line.
-Some examples:
+Mmark supports caption below [tables](#tables), [code blocks](#code-blocks) and [block
+quotes](#block-quotes). You can caption each elements with `Caption: `. The caption extends to the
+first *empty* line. Some examples:
 
 ~~~
 Name    | Age
@@ -275,10 +278,7 @@ You can escape a callout with a backslash. The backslash will be removed in the 
 source code and text). The callout identifiers will be *remembered* until the next code block.
 
 There is currently no way to propose alternative syntax for the callout reference other than
-`(number)`.
-
-Note that callouts are only detected with the [IAL](#inline-attribute-lists)
-`{callout="yes"}` or any other non-empty value is defined before the code block.
+`<number>`.
 
 Using callouts in source code examples will lead to code examples that do not compile.
 To fix this the callout needs to be placed in a comment, but then your source show useless empty comments.
@@ -364,14 +364,12 @@ To make `item` primary, use another `!`: `(!!item, subitem)`.
 
 ### Citations
 
-Mmark uses the citation syntax from Pandoc (and extends it): `[@RFC2535]`, the citation can either
-be informative (default) or normative, this can be indicated by using the `?` or `!` modifier:
-`[@!RFC2535]` create a normative reference for RFC 2535. To suppress a citation use `[-@RFC1000]`.
-It will still add the citation to the references, but does not show up in the document as
-a citation.
+Mmark uses the citation syntax from Pandoc: `[@RFC2535]`, the citation can either be informative
+(default) or normative, this can be indicated by using the `?` or `!` modifier: `[@!RFC2535]` create
+a normative reference for RFC 2535. To suppress a citation use `[-@RFC1000]`. It will still add the
+citation to the references, but does not show up in the document as a citation.
 
 The first seen modifier determines the type (suppressed, normative or informative).
-
 Multiple citation can separated with a semicolon: `[@RFC1034; @RFC1035]`.
 
 If you reference an RFC or I-D the reference will be added automatically (no need to muck about
@@ -417,7 +415,6 @@ Normal markdown synax.
 
 **TODO**: better text here.
 **TODO**: drop use of ial
-
 
 This block-level element is used to attach attributes to another block-level element. An IAL
 has to be put directly before a block-level element of which the attributes should be attached.
