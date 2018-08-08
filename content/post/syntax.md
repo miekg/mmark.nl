@@ -9,27 +9,32 @@ based on a [new markdown implementation](https://github.com/mmarkdown/markdown)
 and some (small) language changes as well. We think these language changes lead to a more consistent
 user experience and lead to less confusion.
 
-## Changes from Mmark1
+# Changes from version 1
 
 These are the changes from Mmark version 1:
 
 * Caption under tables, figure, quotes and code block are now *always* done with `Caption: `. No
   more `Table: `, `Quote: `, and `Figure: `.
 * Citations:
-   * Suppressing a citation is now done with `[@-ref]` (it was the reverse `-@` in v1), this is more consistent.
-   * Multiple citation are allowed in one go, separated with a semicolons: `[@ref1; @ref2]`.
+   * Suppressing a citation is done with `[@-ref]` (it was the reverse `-@` in v1), this is more consistent.
+   * Multiple citations are allowed in one go, separated with a semicolons: `[@ref1; @ref2]`.
    * **TODO** Reference text is allowed `[@ref p. 23]`.
 * **TODO** Indices: now just done with `(!item)`, marking one primary will be: `(!!item)`.
-* **TODO** Including files with a prefix is now specified in the address specification:
+* Including files with a prefix is now specified in the address specification:
   `{{myfile}}[prefix="C: "]` will use `C: ` as the prefix. No more mucking about with block
   attribute lists that are hard to discover.
 * **TODO** Extended table syntax.
-* Code block call outs are now a renderer setting, not a block level attribute.
+* **TODO** Code block call outs are now a renderer setting, not a block level attribute.
 * Title Block need to be sandwiched between `%%%`, the prefix `%` does not work anymore.
-* HTML Attribute support is dropped.
+
+Syntax that is not supported anymore:
+
+* HTML abbreviations are dropped.
 * The different list syntaxes have been dropped, use the Block Level Attribute to tweak the output.
 * Tasks lists: dropped
 * Comment detection, i.e. to support `cref`: dropped. Comments *are* **NOT** copied into the XML.
+
+# Mmark V2 Syntax
 
 This document describes all the *extra* syntax elements that can be used in Mmark. Mmark's syntax is
 based on the ["standard" Markdown syntax](https://daringfireball.net/projects/markdown/syntax).
@@ -97,8 +102,6 @@ Source code:
     ````
     ~~~
     Will be typesets as source code with the language set go `go`.
-
-# Mmark V2 Syntax
 
 ## Block Elements
 
