@@ -1,7 +1,7 @@
 ---
 title: "Syntax"
 date: 2018-07-22T14:05:51+01:00
-aliases: [/about/]
+aliases: [/syntax/]
 ---
 
 This is version 2 of [Mmark](https://github.com/mmarkdown/mmark):
@@ -24,15 +24,17 @@ These are the changes from Mmark version 1:
   `{{myfile}}[prefix="C: "]` will use `C: ` as the prefix. No more mucking about with block
   attribute lists that are hard to discover.
 * **TODO** Extended table syntax.
-* **TODO** Code block call outs are now a renderer setting, not a block level attribute.
+* **TODO** Code block call outs are now a renderer setting, not a [Block Level Attribute](#block-level-attributes).
 * Title Block need to be sandwiched between `%%%`, the prefix `%` does not work anymore.
 
 Syntax that is not supported anymore:
 
-* HTML abbreviations are dropped.
-* The different list syntaxes have been dropped, use the Block Level Attribute to tweak the output.
-* Tasks lists: dropped
-* Comment detection, i.e. to support `cref`: dropped. Comments *are* **NOT** copied into the XML.
+* HTML abbreviations.
+* The different list syntaxes have been dropped, use a [Block Level
+  Attribute](#block-level-attributes) to tweak the output.
+* Tasks lists.
+* Comment detection, i.e. to support `cref`: dropped. Comments are copied depending on the
+  flag `renderer.SkipHTML`.
 
 # Mmark V2 Syntax
 
@@ -411,7 +413,15 @@ subscripts, use `P~a\ cat~`, not `P~a cat~`.
 Normal markdown synax.
 **SVG TODO and maybe new syntax**
 
-## Block Attribute
+## Block Level Attributes
+
+A "Block Level Attribute" is a list of HTML attributes between braces: `{...}`. It allow you to 
+set classes, anchors and other type of *extra* information for the next block level element.
+
+~~~
+{title="The blockquote title" #myid}
+> A blockquote with a title
+~~~
 
 **TODO**: better text here.
 **TODO**: drop use of ial
