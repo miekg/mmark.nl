@@ -9,7 +9,7 @@ clean:
 test:
 	hugo server
 
-.PHONY: copy
-copy:
+.PHONY: sync
+sync:
 	cp $$GOPATH/src/github.com/mmarkdown/mmark/syntax.md content/post/syntax.md
 	cp $$GOPATH/src/github.com/mmarkdown/mmark/README.md content/post/about.md
