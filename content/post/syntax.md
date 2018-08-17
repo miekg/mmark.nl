@@ -11,6 +11,11 @@ user experience and lead to less confusion.
 
 See [changes from v1](#changes-from-version-1) if you're comming from version 1.
 
+Biggest changes:
+
+* Including files is now done relative to the file being parsed (i.e. the *sane* way).
+* Block attributes apply to block elements *only*.
+
 # Why this new version?
 
 It fixes a bunch of long standing bugs and the parser generates an abstract syntax tree (AST), and
@@ -38,6 +43,7 @@ extensions by default:
 * *MathJax*, parse MathJax
 * *OrderedListStart*, notice start element of ordered list.
 * *Attributes* allow block level attributes.
+* *SmartypantsDashes* expad `--` and `---` into ndash and mdashes.
 
 Mmark adds numerous enhancements to make it suitable for writing (IETF) Internet Drafts and even
 complete books. It <strike>steals</strike> borrows syntax elements from [pandoc], [kramdown],
@@ -65,6 +71,16 @@ Mmark adds:
 * Indices
 * Citations
 * Callouts
+
+### Syntax Gotchas
+
+Because markdown is not perfect, there are some gotchas you have to be aware of:
+
+* Adding a `Caption` under a quote block needs a newline before it, otherwise the caption text
+  will be detected as being part of the quote.
+* Including files in lists requires a empty line to be present in the list item; otherwise mmark
+  will only assume inline elements and not parse the includes.
+
 
 ### RFC 7991 XML Output
 
@@ -310,7 +326,30 @@ Note that for citing I-Ds and RFCs you *don't* need to include any XML, as Mmark
 automatically from their online location: or technically more correct: the xml2rfc post processor
 will do this.
 
-## Span Elements
+### Block Level Attributes
+
+A "Block Level Attribute" is a list of HTML attributes between braces: `{...}`. It allows you to
+set classes, an anchor and other types of *extra* information for the next block level element.
+
+The full syntax is: `{#id .class key="value"}`. Values may be omitted, i,e., just `{.class}` is
+valid.
+
+The following example applies the attributes: `type` and `id` to the blockquote:
+~~~
+{title="The blockquote title" #myid}
+> A blockquote with a title
+~~~
+Gets expanded into:
+~~~
+<blockquote id="myid" title="The blockquote title">
+    <t>A blockquote with a title</t>
+</blockquote>
+~~~
+
+
+## Inline Elements
+
+
 
 ### Indices
 
@@ -371,26 +410,6 @@ subscripts, use `P~a\ cat~`, not `P~a cat~`.
 Normal markdown synax.
 **SVG TODO and maybe new syntax**
 
-## Block Level Attributes
-
-A "Block Level Attribute" is a list of HTML attributes between braces: `{...}`. It allows you to
-set classes, an anchor and other types of *extra* information for the next block level element.
-
-The full syntax is: `{#id .class key="value"}`. Values may be omitted, i,e., just `{.class}` is
-valid.
-
-The following example applies the attributes: `type` and `id` to the blockquote:
-~~~
-{title="The blockquote title" #myid}
-> A blockquote with a title
-~~~
-Gets expanded into:
-~~~
-<blockquote id="myid" title="The blockquote title">
-    <t>A blockquote with a title</t>
-</blockquote>
-~~~
-
 ### Callouts
 
 Callouts are way to reference code from paragraphs following that code. Mmark uses the following
@@ -415,6 +434,10 @@ for them. The default mmark configuration is to detect them after `//` and `#` c
 See the `-comment` option for to change this.
 
 Lone callouts without them being prefixed with a comment means they are not detected by Mmark.
+
+### Inline math
+
+Any text in between `$` and `$` will be assumed to be .. TODO
 
 # Changes from version 1
 
