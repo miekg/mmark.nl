@@ -18,11 +18,11 @@ Biggest changes:
 
 # Why this new version?
 
-It fixes a bunch of long standing bugs and the parser generates an abstract syntax tree (AST), and
-it looks like it will be easier to add new renderers with this setup. It is also closer to Common
-Mark. So we took this oppertunity to support RFC 7991 XML, (re-)add HTML5 and ponder LaTeX and RFC
-7749 XML (xml2rfc version 2). With simpler code, more things upstreamed, so less code to maintain
-here.
+It fixes a bunch of long standing bugs and the parser generates an abstract syntax tree (AST). It
+looks like it will be easier to add new renderers with this setup. It is also closer to Common Mark.
+So we took this oppertunity to support RFC 7991 XML, (re-)add HTML5 and ponder LaTeX and RFC 7749
+XML (xml2rfc version 2) support. Also more things upstreamed (to
+[gomarkdown](https://github.com/gomarkdown), we have less code to maintain.
 
 # Mmark V2 Syntax
 
@@ -42,8 +42,9 @@ extensions by default:
 * *DefinitionLists*, parse definition lists.
 * *MathJax*, parse MathJax
 * *OrderedListStart*, notice start element of ordered list.
-* *Attributes* allow block level attributes.
-* *SmartypantsDashes* expad `--` and `---` into ndash and mdashes.
+* *Attributes*, allow block level attributes.
+* *Smartypants*, expand `--` and `---` into ndash and mdashes.
+* *Tables*, parse tables.
 
 Mmark adds numerous enhancements to make it suitable for writing (IETF) Internet Drafts and even
 complete books. It <strike>steals</strike> borrows syntax elements from [pandoc], [kramdown],
@@ -67,7 +68,7 @@ Mmark adds:
 * Including other files with the option to specify line ranges and/or prefix each line with a string
 * Document divisions
 * Captions for code, tables and quotes
-* Asides and other unnumbered sections (i.e. Abstract)
+* Asides and other unnumbered (special) sections (i.e. Abstract)
 * Indices
 * Citations
 * Callouts
@@ -76,11 +77,10 @@ Mmark adds:
 
 Because markdown is not perfect, there are some gotchas you have to be aware of:
 
-* Adding a `Caption` under a quote block needs a newline before it, otherwise the caption text
+* Adding a caption under a quote block (`Quote: `) needs a newline before it, otherwise the caption text
   will be detected as being part of the quote.
-* Including files in lists requires a empty line to be present in the list item; otherwise mmark
-  will only assume inline elements and not parse the includes.
-
+* Including files in lists requires a empty line to be present in the list item; otherwise Mmark
+  will only assume inline elements and not parse the includes (which are block level elements).
 
 ### RFC 7991 XML Output
 
@@ -118,6 +118,17 @@ Source code:
     ````
     ~~~
     Will be typesets as source code with the language set to `go`.
+
+### XML RFC 7441(?) XML Output
+
+> This renderer does not exit yet.
+
+Title Block:
+:   Identical to RFC 7991, Mmark will take care to translate this into something xml2rfc can
+    understand.
+
+Artwork/Source code:
+:   There is no such distinction so these will be rendered in the same way regardles.
 
 ## Block Elements
 
@@ -159,7 +170,7 @@ An I-D needs to have a Title Block with the following items filled out:
 
 An example would be:
 
-~~~
+~~~ toml
 %%%
 title = "Using mmark to create I-Ds and RFCs"
 abbrev = "mmark2rfc"
@@ -188,6 +199,11 @@ organization = "Mmark"
 ~~~
 
 An `#` acts as a comment in this block. TOML itself is specified [here](https://github.com/toml-lang/toml).
+
+### Special Sections
+
+Any section that needs special handling, like an abstract or preface can be started with `.#
+Heading`. This creates a special section that is usually unnumbered.
 
 ### Including Files
 
@@ -222,8 +238,16 @@ Captioning works as well:
 
 ~~~
 <{{test.go}}[/START/,/END/]
-Caption: A sample function.
+Figure: A sample function.
 ~~~
+
+Note that because the extension of the file above is "go", this include will lead to the following
+block being parsed:
+
+    ~~~ go
+    // test.go data
+    ~~~
+    Figure: A sample function.
 
 ### Document Divisions
 
@@ -235,15 +259,15 @@ thing on the line.
 ## Captions
 
 Mmark supports caption below [tables](#tables), [code blocks](#code-blocks) and [block
-quotes](#block-quotes). You can caption each elements with `Caption: `. The caption extends to the
-first *empty* line. Some examples:
+quotes](#block-quotes). You can caption each elements with `Table: `, `Figure: ` and `Quote: `
+respectivily. The caption extends to the first *empty* line. Some examples:
 
 ~~~
 Name    | Age
 --------|-----:
 Bob     | 27
 Alice   | 23
-Caption: This is the table caption.
+Table: This is the table caption.
 ~~~
 
 Or for a code block:
@@ -253,12 +277,12 @@ Or for a code block:
          return true
      }
      ~~~
-     Caption: This is a caption for a code block.
+     Figure: This is a caption for a code block.
 
 And for a quote:
 
      > Ability is nothing without opportunity.
-     Caption: https://example.com, Napoleon Bonaparte
+     Quote: https://example.com, Napoleon Bonaparte
 
 ### Asides
 
@@ -286,13 +310,13 @@ F> +-----+
 F> | ART |
 F> +-----+
 F> ~~~~
-F> Caption: This caption is ignored in v3, but used in v2.
+F> Figure: This caption is ignored in v3, but used in v2.
 F>
 F> ~~~ c
 F> printf("%s\n", "hello");
 F> ~~~
 F>
-Caption: Caption for both figures in v3 (in v2 this is ignored).
+Figure: Caption for both figures in v3 (in v2 this is ignored).
 ~~~
 
 ### Example lists
@@ -443,8 +467,6 @@ Any text in between `$` and `$` will be assumed to be .. TODO
 
 These are the changes from Mmark version 1:
 
-* Caption under tables, figure, quotes and code block are now *always* done with `Caption: `. No
-  more `Table: `, `Quote: `, and `Figure: `.
 * Citations:
    * Suppressing a citation is done with `[@-ref]` (it was the reverse `-@` in v1), this is more consistent.
    * Multiple citations are allowed in one go, separated with a semicolons: `[@ref1; @ref2]`.
