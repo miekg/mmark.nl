@@ -134,3 +134,6 @@ Table of Contents
 
    Hi! _from_ Mmark.
 ~~~
+
+The [rfc](https://github.com/mmarkdown/mmark/blob/rfc) directory has a couple of (older) RFCs that
+have been converted to Mmark.
