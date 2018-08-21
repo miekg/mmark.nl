@@ -11,19 +11,13 @@ theme = "after-dark"
   powered_by = false
 
 [[menu.Main]]
-    name = "Home"
-    weight = 1
-    identifier = "home"
-    url = "/"
-
-[[menu.Main]]
     name = "Syntax"
-    weight = 2
+    weight = 1
     identifier = "syntax"
     url = "/post/syntax"
 
 [[menu.Main]]
-    name = "Get Started"
+    name = "Quick Start"
     weight = 2
     identifier = "started"
     url = "/post/start"
@@ -39,3 +33,9 @@ theme = "after-dark"
     weight = 4
     identifier = "github"
     url = "https://github.com/mmarkdown/mmark"
+
+[[menu.Main]]
+    name = "Binaries"
+    weight = 5
+    identifier = "binaries"
+    url = "https://github.com/mmarkdown/mmark/releases"

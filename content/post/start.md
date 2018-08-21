@@ -1,5 +1,5 @@
 ---
-title: "Get Started"
+title: "Quick Start"
 date: 2018-08-07T14:05:51+01:00
 aliases: [/start/]
 ---
@@ -16,7 +16,7 @@ mmark
 ~~~
 
 Now with `./mmark test.md` you render *test.md* to RFC 7991 XML (xml2rfc version 3), let's take
-a look at test.md:
+a look at test.md. For xml2rfc version 2, just use the `-2` flag.
 
 ~~~ markdown
 %%%
