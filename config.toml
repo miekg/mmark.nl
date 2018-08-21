@@ -23,6 +23,12 @@ theme = "after-dark"
     url = "/post/syntax"
 
 [[menu.Main]]
+    name = "Get Started"
+    weight = 2
+    identifier = "started"
+    url = "/post/start"
+
+[[menu.Main]]
     name = "About"
     weight = 3
     identifier = "about"
