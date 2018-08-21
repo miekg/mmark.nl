@@ -8,11 +8,11 @@ The easiest way to get started is to download one of the [precompiled
 binaries](https://github.com/mmarkdown/mmark/releases).
 
 ~~~ sh
-% wget URL
-% tar xvfz mmark.tar.gz
-% chmod +x mmark
+% wget https://github.com/mmarkdown/mmark/releases/download/v1.9.93/mmark_1.9.93_linux_amd64.tgz
+% tar xvf mmark_1.9.93_linux_amd64.tgz
+mmark
 % ./mmark -version
-2.0.0
+1.9.93
 ~~~
 
 Now with `./mmark test.md` you render *test.md* to RFC 7991 XML (xml2rfc version 3), let's take
@@ -135,5 +135,5 @@ Table of Contents
    Hi! _from_ Mmark.
 ~~~
 
-The [rfc](https://github.com/mmarkdown/mmark/blob/rfc) directory has a couple of (older) RFCs that
-have been converted to Mmark.
+The [rfc](https://github.com/mmarkdown/mmark/tree/master/rfc) directory has a couple of (older) RFCs that
+have been converted to Mmark for (syntax) inspiration.
