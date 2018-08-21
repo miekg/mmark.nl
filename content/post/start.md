@@ -40,7 +40,7 @@ with `.#` to signal a "special" heading. The title block and abstract are part o
 of the document which is opened. To start the *main* matter of the doc we use `{mainmatter}`
 And lastly we start a "real" section with some text.
 
-If we render this (`./mmark test.md`), we this XML:
+If we render this (`./mmark test.md`), we get this XML:
 
 ~~~ xml
 <?xml version="1.0" encoding="utf-8"?>
@@ -111,12 +111,12 @@ Created file x.txt
 Where `x.txt` is the generated text of the I-D (showing small excerpt):
 
 ~~~ txt
-Network Working Group                                          R. Gieben
-Internet-Draft                                            21 August 2018
+Network Working Group                   R. Gieben
+Internet-Draft                     21 August 2018
 Expires: 22 February 2019
 
 
-                             Mmark document
+                      Mmark Document
 
 Abstract
 
@@ -136,4 +136,5 @@ Table of Contents
 ~~~
 
 The [rfc](https://github.com/mmarkdown/mmark/tree/master/rfc) directory has a couple of (older) RFCs that
-have been converted to Mmark for (syntax) inspiration.
+have been converted to Mmark for (syntax) inspiration, or take a look at the [syntax
+document](/syntax).
