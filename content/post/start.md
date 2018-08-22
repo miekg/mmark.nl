@@ -45,16 +45,15 @@ If we render this (`./mmark test.md`), we get this XML:
 ~~~ xml
 <?xml version="1.0" encoding="utf-8"?>
 <!-- name="GENERATOR" content="github.com/mmarkdown/mmark markdown processor for Go" -->
-<rfc version="3" ipr="trust200902" submissionType="IETF"
-     xml:lang="en" consensus="false" xmlns:xi="http://www.w3.org/2001/XInclude">
+<rfc version="3" ipr="trust200902" submissionType="IETF" xml:lang="en" consensus="false" xmlns:xi="http://www.w3.org/2001/XInclude">
 
 <front>
 <title>Mmark Document</title><seriesInfo></seriesInfo>
-<date year="2018" month="8" day="21"></date>
+<date year="2018" month="8" day="22"></date>
 <area>Internet</area>
 <workgroup></workgroup>
 
-<abstract>
+<abstract anchor="abstract">
 <t>This is a small test document.</t>
 </abstract>
 
@@ -62,7 +61,7 @@ If we render this (`./mmark test.md`), we get this XML:
 
 <middle>
 
-<section><name>First Section</name>
+<section anchor="first-section"><name>First Section</name>
 <t>Hi! <em>from</em> Mmark.</t>
 </section>
 
