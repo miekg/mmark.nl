@@ -4,6 +4,8 @@ date: 2018-07-22T14:05:51+01:00
 aliases: [/about/]
 ---
 
+[![Build Status](https://img.shields.io/travis/mmarkdown/mmark/master.svg?label=build)](https://travis-ci.org/mmarkdown/mmark)
+
 Mmark is a powerful markdown processor written in Go, geared towards writing IETF documents. It is,
 however, *also* suited for writing complete books and other technical documentation, like the
 [Learning Go book](https://miek.nl/go) ([mmark source](https://github.com/miekg/learninggo)).
@@ -49,9 +51,10 @@ Mmark adds the following syntax elements to
 
 ## Usage
 
-To build mmark you need to working [Go environment](https://golang.org), then check out the code and:
+You can [download a binary](https://github.com/mmarkdown/mmark/releases) or optionally build mmark
+your self. You'll need a working [Go environment](https://golang.org), then check out the code and:
 
-    % go build
+    % go get && go build
     % ./mmark -version
     2.0.0
 
@@ -66,7 +69,6 @@ Making a draft in text form:
 
 Outputting HTML5 is done with the `-html` switch. Outputting RFC 7749 is done with `-2`.
 
-Optionally you can [download a binary](https://github.com/mmarkdown/mmark/releases).
 
 [1]: https://daringfireball.net/projects/markdown/ "Markdown"
 [2]: https://golang.org/ "Go Language"
