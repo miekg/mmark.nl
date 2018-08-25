@@ -107,6 +107,8 @@ Because markdown is not perfect, there are some gotchas you have to be aware of:
   specific modifiers to the markdown document making it more tailored for a single output format.
 * A bibliography is *only added* if a `{backmatter}` has been specified, because we need to add just
   before that point.
+* Intra-work emphasis is enabled so a string like `SSH_MSG_KEXECDH_REPLY` is interpreted as
+  `SSH<em>MSG</em>...`. You need to escape the underscores: `SSH\_MSG...`.
 
 ### RFC 7991 XML Output
 
@@ -117,7 +119,8 @@ can be used directly to upload to the IETF tools website.
 Title Block:
 :   If the document has a [title block](#title-block) the front matter is already open. Closing the
     front matter can only be done by starting the middle matter with `{mainmatter}`. Any open
-    "matters" are closed when the document ends.
+    "matters" are closed when the document ends. *Area* defaults to "Internet" and *Ipr* defaults to
+    `*trust200902`.
 
 Abstract:
 :   The abstract can be started by using the special header syntax `.# Abstract`
@@ -158,6 +161,7 @@ Title Block:
 :   Identical to RFC 7991, Mmark will take care to translate this into something xml2rfc (v2) can
     understand. An Mmark document will generate valid RFC 7991 and 7749 XML, unless [block
     level attributes](#block-level-attributes) are used that are speficic to each format.
+    *Area* defaults to "Internet" and *Ipr* defaults to `*trust200902`.
 
 BCP 14/RFC 2119 Keywords:
 :   If an RFC 2119 word is found enclosed in `**` it will be rendered normally
