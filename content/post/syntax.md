@@ -129,6 +129,7 @@ Abstract:
 Note:
 :   Any special header that is not "abstract" or "preface" will be a
     [note](https://tools.ietf.org/html/rfc7749#section-2.24): a numberless section.
+    These notes are only allowed in the `<front>` section of the document.
 
 BCP 14/RFC 2119 Keywords:
 :   If an RFC 2119 word is found enclosed in `**` it will be rendered
@@ -156,8 +157,8 @@ Block Level Attributes:
     attributes, so `{style="empty" empty="true"}`, will make a document both RFC 7991 and RFC 7749
     compliant.
 
-Asides:
-:   These are only allowed in the front section of the document.
+Footnotes:
+:   Are discarded from the final output, don't use them.
 
 ### XML RFC 7749 Output
 
@@ -178,6 +179,12 @@ Block Level Attributes:
 :   We use the attributes as specified in RFC 7749, e.g. to speficify an empty list style use:
     `{style="empty"}` before the list. Any attributes that are not allowed are filtered out, so
     `{style="empty" empty="true"}`, will make a document both RFC 7749 and RFC 7991 compliant.
+
+Asides:
+:   Basically not supported, will be rendered as a plain paragraph.
+
+Footnotes:
+:   Are discarded from the final output, don't use them.
 
 ### HTML5 Output
 
@@ -310,7 +317,7 @@ automatically starts the front matter for you *if* the document has a title bloc
 divisions can be done with `{frontmatter}`, `{mainmatter}` and `{backmatter}`. This must be the only
 thing on the line.
 
-## Captions
+### Captions
 
 Mmark supports caption below [tables](#tables), [code blocks](#code-blocks) and [block
 quotes](#block-quotes). You can caption each elements with `Table: `, `Figure: ` and `Quote: `
