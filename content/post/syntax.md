@@ -58,7 +58,7 @@ extensions by default:
 * *OrderedListStart*, notice start element of ordered list.
 * *Attributes*, allow block level attributes.
 * *Smartypants*, expand `--` and `---` into ndash and mdashes.
-* *SuperSubscript*, parse super and subscript.
+* *SuperSubscript*, parse super and subscript: H~2~O is water and 2^10^ is 1024.
 * *Tables*, parse tables.
 
 Mmark adds numerous enhancements to make it suitable for writing ([IETF](https://ietf.org)) Internet
@@ -121,7 +121,7 @@ Title Block:
 :   If the document has a [title block](#title-block) the front matter is already open. Closing the
     front matter can only be done by starting the middle matter with `{mainmatter}`. Any open
     "matters" are closed when the document ends. *Area* defaults to "Internet" and *Ipr* defaults to
-    `*trust200902`.
+    `trust200902`.
 
 Abstract:
 :   The abstract can be started by using the special header syntax `.# Abstract`
@@ -165,7 +165,7 @@ Title Block:
 :   Identical to RFC 7991, Mmark will take care to translate this into something xml2rfc (v2) can
     understand. An Mmark document will generate valid RFC 7991 and 7749 XML, unless [block
     level attributes](#block-level-attributes) are used that are speficic to each format.
-    *Area* defaults to "Internet" and *Ipr* defaults to `*trust200902`.
+    *Area* defaults to "Internet" and *Ipr* defaults to `trust200902`.
 
 BCP 14/RFC 2119 Keywords:
 :   If an RFC 2119 word is found enclosed in `**` it will be rendered normally
