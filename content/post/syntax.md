@@ -100,11 +100,10 @@ Because markdown is not perfect, there are some gotchas you have to be aware of:
 
 * Adding a caption under a quote block (`Quote: `) needs a newline before it, otherwise the caption text
   will be detected as being part of the quote.
+* Including files (and code includes) requires are empty line before them, as they are block level
+  elements and we need to trigger *that* scan from the parser.
 * Including files in lists requires a empty line to be present in the list item; otherwise Mmark
   will only assume inline elements and not parse the includes (which are block level elements).
-* If you *don't* use [Block Level Attributes](#block-level-attributes) a document written in Mmark
-  should translate to valid HTML5, RFC7991 XML and RFC7749 XML. Block Level Attributes add out
-  specific modifiers to the markdown document making it more tailored for a single output format.
 * A bibliography is *only added* if a `{backmatter}` has been specified, because we need to add just
   before that point.
 * Intra-work emphasis is enabled so a string like `SSH_MSG_KEXECDH_REPLY` is interpreted as
@@ -150,7 +149,10 @@ Source code:
 
 Block Level Attributes:
 :   We use the attributes as specified in RFC 7991, e.g. to speficify an empty list style use:
-    `{empty="true"}` before the list.
+    `{empty="true"}` before the list. The renderer for this output format filters unknown attributes
+    away. The current list is to allow IDs (translated into 'anchor'), remove any `class=` and `style=`
+    attributes, so `{style="empty" empty="true"}`, will make a document both RFC 7991 and RFC 7749
+    compliant.
 
 Asides:
 :   These are only allowed in the front section of the document.
@@ -172,7 +174,8 @@ Artwork/Source code:
 
 Block Level Attributes:
 :   We use the attributes as specified in RFC 7749, e.g. to speficify an empty list style use:
-    `{style="empty"}` before the list.
+    `{style="empty"}` before the list. Any attributes that are not allowed are filtered out, so
+    `{style="empty" empty="true"}`, will make a document both RFC 7749 and RFC 7991 compliant.
 
 ### HTML5 Output
 
@@ -388,7 +391,6 @@ Gets expanded into:
     <t>A blockquote with a title</t>
 </blockquote>
 ~~~
-
 
 ## Inline Elements
 
