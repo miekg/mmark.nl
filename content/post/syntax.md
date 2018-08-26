@@ -2,6 +2,7 @@
 title: "Syntax"
 date: 2018-07-22T14:05:51+01:00
 aliases: [/syntax/]
+toc: true
 ---
 
 This is version 2 of [Mmark](https://github.com/mmarkdown/mmark):
