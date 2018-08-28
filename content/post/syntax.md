@@ -267,6 +267,10 @@ An `#` acts as a comment in this block. TOML itself is specified [here](https://
 Any section that needs special handling, like an abstract or preface can be started with `.#
 Heading`. This creates a special section that is usually unnumbered.
 
+What you type | What you get
+--------------|-------------
+.# Section 1  | `<h1 class="special" id="section1">section1</h1>`
+
 ### Including Files
 
 Including other files can done be with `{{filename}}`, if the path of `filename` is *not* absolute,
