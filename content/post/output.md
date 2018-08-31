@@ -1,6 +1,6 @@
 ---
 title: "How to Input Mmark"
-date: 2018-08-31T14:05:51+01:00
+date: 2018-08-31T07:05:51+01:00
 aliases: [/ouput/]
 toc: true
 ---
