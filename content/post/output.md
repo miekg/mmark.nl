@@ -21,12 +21,14 @@ To format a line as a heading, use `#`, the number of hashes determines the leve
 
 html:
 :
+
     ~~~
     <h1 id="introduction">Introduction</h1>
     ~~~
 
 xml2:
 :
+
     ~~~
     <section anchor="introduction" title="Introduction">
     </section>
@@ -34,6 +36,7 @@ xml2:
 
 xml3:
 :
+
     ~~~
     <section anchor="introduction"><name>Introduction</name>
     </section>
