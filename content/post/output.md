@@ -19,25 +19,22 @@ To format a line as a heading, use `#`, the number of hashes determines the leve
 
 ### You Get
 
-html:
-:
+html
 
-    ~~~
-    <h1 id="introduction">Introduction</h1>
-    ~~~
+~~~
+<h1 id="introduction">Introduction</h1>
+~~~
 
-xml2:
-:
+xml2
 
-    ~~~
-    <section anchor="introduction" title="Introduction">
-    </section>
-    ~~~
+~~~
+<section anchor="introduction" title="Introduction">
+</section>
+~~~
 
-xml3:
-:
+xml3
 
-    ~~~
-    <section anchor="introduction"><name>Introduction</name>
-    </section>
-    ~~~
+~~~
+<section anchor="introduction"><name>Introduction</name>
+</section>
+~~~
