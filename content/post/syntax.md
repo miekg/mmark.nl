@@ -180,7 +180,10 @@ BCP 14/RFC 2119 Keywords:
     becomes `MUST`.
 
 Artwork/Source code:
-:   There is no such distinction so these will be rendered in the same way regardless.
+:   There is no such distinction so these will be rendered in the same way regardless. If you need a
+    caption you can just give it one. If you want the *final* output to prefix `Figure N` or `Table
+    N` is **also** needs to have an anchor; this is done with a block level attribute: `{#figX}`. If
+    you *only* want `Figure N`, only give it an anchor.
 
 Block Level Attributes:
 :   We use the attributes as specified in RFC 7749, e.g. to speficify an empty list style use:
@@ -446,8 +449,11 @@ citation to the references, but does not show up in the document as a citation.
 The first seen modifier determines the type (suppressed, normative or informative).
 Multiple citation can separated with a semicolon: `[@RFC1034; @RFC1035]`.
 
-If you reference an RFC or I-D the reference will be added automatically (no need to muck about
-with an `<reference>` block.
+If you reference an RFC, I-D or W3C document the reference will be added automatically (no need to
+muck about with an `<reference>` block. This is to say:
+
+Any reference starting with *RFC*, *I-D.* or *W3C.* will be automatically added to the correct
+reference section.
 
 For I-Ds you may want to add a draft sequence number, which can be done as such: `[@?I-D.blah#06]`.
 If you reference an I-D *without* a sequence number it will create a reference to the *last* I-D in
@@ -537,7 +543,8 @@ detected by Mmark.
 
 Phrases that are defined in RFC 2119 (i.e. MUST, SHOULD, etc) are detected when being type set as
 strong elements: `**MUST**`, in the RFC 7991 output these will typeset as `<bcp14>MUST</bcp14>`. In
-RFC 7749 output it will just be `MUST`.
+RFC 7749 output it will just be `MUST`. Not that these can't span lines, e.g., `**MUST NOT**`, must
+be on a single line.
 
 # Changes from version 1
 
