@@ -290,25 +290,6 @@ organization = "Mmark"
 
 An `#` acts as a comment in this block. TOML itself is specified [here](https://github.com/toml-lang/toml).
 
-### Sections
-
-#### What you need to type
-
-~~~
-This is an H1
-=============
-
-This is an H2
--------------
-~~~
-
-#### What you get
-
-<h1 id="this-is-an-h1">This is an H1</h1>
-
-<h2 id="this-is-an-h2">This is an H2</h2>
-
-
 ### Special Sections
 
 Any section that needs special handling, like an abstract or preface can be started with `.#
