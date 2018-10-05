@@ -5,7 +5,10 @@ aliases: [/start/]
 ---
 
 The easiest way to get started is to download one of the [precompiled
-binaries](https://github.com/mmarkdown/mmark/releases).
+binaries](https://github.com/mmarkdown/mmark/releases). And familiarize yourself with markdown and
+it's syntax and read our [syntax](/syntax) document.
+
+<!--more-->
 
 ~~~ sh
 % wget https://github.com/mmarkdown/mmark/releases/download/v1.9.93/mmark_1.9.93_linux_amd64.tgz

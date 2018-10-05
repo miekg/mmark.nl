@@ -9,6 +9,8 @@ This is version 2 of [Mmark](https://github.com/mmarkdown/mmark): based on a [ne
 implementation](https://github.com/mmarkdown/markdown) and some (small) language changes as well. We
 think these language changes lead to a more consistent user experience and lead to less confusion.
 
+<!--more-->
+
 See [changes from v1](#changes-from-version-1) if you're coming from version 1.
 
 Biggest changes:
