@@ -8,6 +8,10 @@ The easiest way to get started is to download one of the [precompiled
 binaries](https://github.com/mmarkdown/mmark/releases). And familiarize yourself with markdown and
 it's syntax and read our [syntax](/syntax) document.
 
+Xml2rfc *should* have a package for your operating system, otherwise it can be found on
+[pypi](https://pypi.org/project/xml2rfc/). For version 3 output you'll need at least 2.10.3, but
+newer is better.
+
 <!--more-->
 
 ~~~ sh
