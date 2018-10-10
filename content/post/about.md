@@ -97,3 +97,9 @@ make TWO="yes" txt
 ~~~
 
 Official RFCs are in rfc/orig (so you can compare the text output from mmark).
+
+## Alternatives
+
+[kramdown-rfc2629](https://github.com/cabo/kramdown-rfc2629) is an alternative markdown parser
+(written in Ruby) based on [kramdown](https://kramdown.gettalong.org/) that has similar aims as
+Mmark.
