@@ -25,7 +25,7 @@ endfunction
 
 au FileType pandoc command! Fmt call MmarkFmt()
 au FileType markdown command! Fmt call MmarkFmt()
-let mmark_pipeline = "mmark -markdown"
-autocmd FileType pandoc let &l:formatprg=mmark_pipeline
-autocmd FileType markdown let &l:formatprg=mmark_pipeline
+let mmark = "mmark -markdown -width 100"
+au FileType pandoc set formatprg=mmark
+au FileType markdown set formatprg=mmark
 ~~~
