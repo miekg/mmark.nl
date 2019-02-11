@@ -6,7 +6,7 @@ toc: true
 ---
 
 This is version 2 of [Mmark](https://github.com/mmarkdown/mmark): based on a [new markdown
-implementation](https://github.com/mmarkdown/markdown) and some (small) language changes as well. We
+implementation](https://github.com/gomarkdown/markdown) and some (small) language changes as well. We
 think these language changes lead to a more consistent user experience and lead to less confusion.
 
 See [changes from v1](#changes-from-version-1) if you're coming from version 1.
@@ -173,6 +173,9 @@ Images:
 Horizontal Line:
 :   Outputs a paragraph with 60 dashes `-`.
 
+Comments:
+:   HTML comments are detected and translated into `<cref>`s.
+
 ### XML RFC 7749 Output
 
 Title Block:
@@ -215,6 +218,9 @@ Block quote:
 Horizontal Line:
 :   Outputs a paragraph with 60 dashes `-`.
 
+Comments:
+:   HTML comments are detected and translated into `<cref>`s.
+
 ### HTML5 Output
 
 Title Block:
@@ -226,18 +232,31 @@ Title Block:
 
 A Title Block contains a document's meta data; title, authors, date and other elements. The elements
 that can be specified are copied from the [xml2rfc v3
-standard](https://tools.ietf.org/html/rfc7791). More on these below. The complete title block is
+standard](https://tools.ietf.org/html/rfc7991). More on these below. The complete title block is
 specified in [TOML](https://github.com/toml-lang/toml). Examples title blocks can be [found in the
 repository of Mmark](https://github.com/mmarkdown/mmark/tree/master/rfc).
 
-The title block itself needs three or more `%`'s at the start and end of the block. A minimal title
-block would look like this:
+The title block itself needs three or more `%`'s (or `-`'s) at the start and end of the block. A
+minimal title block would look like this:
 
 ~~~
 %%%
 title = "Foo Bar"
 %%%
 ~~~
+or
+
+~~~
+---
+title = "Foo Bar"
+---
+~~~
+
+The difference between the two is:
+
+* `%%%`: block is assumed to be encoded in TOML and *parsed*.
+* `---`: block is not parsed just outputted as-is again (for markdown output), all other format
+  ignore the contents.
 
 #### Elements of the Title Block
 
@@ -375,6 +394,17 @@ And for a quote:
 
      Quote: https://example.com, Napoleon Bonaparte
 
+A caption can potentially contain a "heading ID": `{#id}` as the *last* text in the caption. If this
+is found that ID is used as the ID for the entire figure:
+
+~~~
+Name    | Age
+--------|-----:
+Bob     | 27
+Alice   | 23
+Table: This is the table caption. {#ages}
+~~~
+
 ### Asides
 
 Any text prefixed with `A>` will become an
@@ -462,7 +492,7 @@ a normative reference for RFC 2535. To suppress a citation use `[@-RFC1000]`. It
 citation to the references, but does not show up in the document as a citation.
 
 The first seen modifier determines the type (suppressed, normative or informative).
-Multiple citation can separated with a semicolon: `[@RFC1034; @RFC1035]`.
+Multiple citation can separated with a semicolon: `[@RFC1034;@RFC1035]`.
 
 If you reference an RFC, I-D or W3C document the reference will be added automatically (no need to
 muck about with an `<reference>` block). This is to say:
@@ -568,7 +598,8 @@ These are the changes from Mmark version 1:
 * Citations:
    * Suppressing a citation is done with `[@-ref]` (it was the reverse `-@` in v1), this is more consistent.
    * Multiple citations are allowed in one go, separated with a semicolons: `[@ref1; @ref2]`.
-   * **TODO** Reference text is allowed `[@ref p. 23]`.
+   * A reference text suffix is allowed `[@ref, p. 23]`, the separation character is a comma; this
+     mirrors the pandoc syntax.
 * Indices: now just done with `(!item)`, marking one primary will be: `(!!item)`.
 * Code block callouts are now a renderer setting, not a [Block Level
   Attribute](#block-level-attributes). Callout in code are *only* detected if they are used after
