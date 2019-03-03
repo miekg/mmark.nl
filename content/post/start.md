@@ -14,6 +14,14 @@ newer is better.
 
 <!--more-->
 
+## Xml2rfc
+
+Getting Xml2rfc for Debian/Ubuntu (assuming you've hunted down any dependencies), with going to
+<https://pypi.org/project/xml2rfc/#files>, downloading the Xml2rfc files there and then running
+`py2dsc-deb xml2rfc-<version>.tar.gz`. `py2dsc` is part of the *python-stdeb* package.
+
+## Mmark
+
 ~~~ sh
 % wget https://github.com/mmarkdown/mmark/releases/download/v1.9.93/mmark_1.9.93_linux_amd64.tgz
 % tar xvf mmark_1.9.93_linux_amd64.tgz
