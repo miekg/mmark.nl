@@ -11,6 +11,6 @@ test:
 
 .PHONY: sync
 sync:
-	cp $$GOPATH/src/github.com/mmarkdown/mmark/Syntax.md content/post/syntax.md
-	cp $$GOPATH/src/github.com/mmarkdown/mmark/README.md content/post/about.md
+	cp ~/go/mmark/Syntax.md content/post/syntax.md
+	cp ~/go/mmark/README.md content/post/about.md
 	git ci -am'Make sync'
