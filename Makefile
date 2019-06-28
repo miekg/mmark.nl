@@ -1,9 +1,9 @@
 all:
-	hugo -d /var/www/mmark.nl
+	hugo -d /var/www/mmark.miek.nl
 
 .PHONY: clean
 clean:
-	rm -rf /var/www/mmark.nl/*
+	rm -rf /var/www/mmark.miek.nl/*
 
 .PHONY: test
 test:
