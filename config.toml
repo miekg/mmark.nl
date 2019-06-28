@@ -1,4 +1,4 @@
-baseURL = "https://mmark.nl/"
+baseURL = "https://mmark.miek.nl/"
 languageCode = "en-us"
 title = "Mmark: powerful markdown parser"
 theme = "after-dark"
