@@ -23,19 +23,25 @@ theme = "after-dark"
     url = "/post/start"
 
 [[menu.Main]]
-    name = "About"
+    name = "FAQ"
     weight = 3
+    identifier = "faq"
+    url = "/post/faq"
+
+[[menu.Main]]
+    name = "About"
+    weight = 4
     identifier = "about"
     url = "/post/about"
 
 [[menu.Main]]
     name = "Github"
-    weight = 4
+    weight = 5
     identifier = "github"
     url = "https://github.com/mmarkdown/mmark"
 
 [[menu.Main]]
     name = "Binaries"
-    weight = 5
+    weight = 6
     identifier = "binaries"
     url = "https://github.com/mmarkdown/mmark/releases"
