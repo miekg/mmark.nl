@@ -9,7 +9,7 @@ Mmark Frequently Asked Questions.
 
 # How Do I Create an Independent IETF Document?
 
-Use the following as starting point for your title block, `ipr` and `submissiontype` or the important
+Use the following as starting point for your title block, `ipr` and `submissiontype` are the important
 settings here.
 
 ~~~ toml
@@ -30,3 +30,12 @@ status = "informational"
 
 Set `submissiontype` and `stream` in `seriesInfo` to *IRTF*. Items like `workgroup` function as they
 do for normal Internet-Draft documents.
+
+# How Do I Create an IAB Document?
+
+Set `submissiontype` and `stream` in `seriesInfo` to *IAB*. Items like `workgroup` are (I believe)
+ignored for this stream.
+
+# How Do I Make an Author an Editor
+
+Use `role = "editor"` in the author's section in the titleblock.
