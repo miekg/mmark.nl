@@ -90,7 +90,8 @@ Mmark adds:
 * [Captions](#captions) for code, tables, quotes and subfigures.
 * [Asides](#asides).
 * [Figures and Subfigures](#figures-and-subfigures) - allows grouping images into subfigures as
-  well as giving a single image metadata (a link, attributes, etc.).
+  well as giving a single image metadata (a link, attributes, etc.). See [Images in
+  Mmark](/syntax/images) for more details.
 * [Block Level Attributes](#block-level-attributes) that allow to specify attributes, classes and
   IDs for elements.
 * [Indices](#indices) to mark an item (and/or a subitem) to be referenced in the document index.
@@ -177,7 +178,7 @@ Images:
     as the `type=` attribute. Also note that an image like this will be wrapped in `<t>` which is
     not allowed in RFC 7991 syntax. So to make this fully work you need to the image in a subfigure:
     `!---`.
-    See [](/syntax/images) for more details.
+    See [Images in Mmark](/syntax/images) for more details.
 
 Horizontal Line:
 :   Outputs a paragraph with 60 dashes `-`.
@@ -210,7 +211,7 @@ Title Block:
     * `date`, date of the man page, optional, defaults to "today".
 
 Images:
-:   See (/syntax/images) for details.
+:   See [Images in Mmark](/syntax/images) for details.
 
 References and citations:
 :   Supported, a "Bibliography" section is added.
