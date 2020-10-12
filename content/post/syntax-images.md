@@ -44,7 +44,8 @@ the type and XML2RFC checks for that string.
 ~~~
 
 Note this syntax is also supported for the manual page output and it does the same thing by only
-using the `ascii-art` version.
+using the `ascii-art` version. This is true for all included imagary; only `ascii-art` ones are
+included in the output.
 
 By some happy co-indicence a browser will not show the `ascii-art` version of the image. It remains
 to be seen if we need some code to actually filter these out.

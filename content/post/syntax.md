@@ -211,7 +211,8 @@ Title Block:
     * `date`, date of the man page, optional, defaults to "today".
 
 Images:
-:   See [Images in Mmark](/syntax/images) for details.
+:   See [Images in Mmark](/syntax/images) for details, `ascii-art` images from a sub-figure are
+    included.
 
 References and citations:
 :   Supported, a "Bibliography" section is added.
