@@ -12,6 +12,7 @@ test:
 .PHONY: sync
 sync:
 	cp /home/miek/src/github.com/mmarkdown/mmark/Syntax.md content/post/syntax.md
+	cp /home/miek/src/github.com/mmarkdown/mmark/Syntax-images.md content/post/syntax-images.md
 	cp /home/miek/src/github.com/mmarkdown/mmark/README.md content/post/about.md
 	cp /home/miek/src/github.com/mmarkdown/mmark/FAQ.md content/post/faq.md
 	git ci -am'Make sync'
