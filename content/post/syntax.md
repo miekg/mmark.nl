@@ -172,16 +172,12 @@ Footnotes:
 :   Are discarded from the final output, don't use them.
 
 Images:
-:   Images are supported, but only SVG graphics are allowed. We convert this to
-    an `<artwork>` with `src` set to the image URL of path. I.e. `![alt text](img.svg "title")` becomes
-    `<artwork src="img.svg" type="svg" name="title"/>`. Note the first `svg` (the alt text) is used
-    as the `type=` attribute. Also note that an image like this will be wrapped in `<t>` which is
-    not allowed in RFC 7991 syntax. So to make this fully work you need to the image in a subfigure:
-    `!---`.
-    See [Images in Mmark](/syntax/images) for more details.
-
-Horizontal Line:
-:   Outputs a paragraph with 60 dashes `-`.
+:   Images are supported. We convert this to an `<artwork>` with `src` set to the image URL of path.
+    I.e. `![alt text](img.svg "title")` becomes `<artwork src="img.svg" type="svg" name="title"/>`.
+    Note the first `svg` (the alt text) is used as the `type=` attribute. Also note that an image
+    like this will be wrapped in `<t>` which is not allowed in RFC 7991 syntax. So to make this
+    fully work you need to the image in a subfigure: `!---`. See [Images in Mmark](/syntax/images)
+    for more details.
 
 Comments:
 :   HTML Comments are detected and discarded. These can be useful to make the parser parse certain
@@ -189,6 +185,9 @@ Comments:
 
 HTML:
 :   The `<br>` tag is detected and converted into a hard break.
+
+Unicode:
+:   Just type the Unicode characters, the renderer takes care of putting these in between `<u>` tags.
 
 ### HTML5 Output
 
@@ -209,13 +208,15 @@ Title Block:
     * `area`, what is it, e.g. "User Commands".
     * `workgroup`, who wrote this e.g.  "Mmark Markdown".
     * `date`, date of the man page, optional, defaults to "today".
+    * `author`, to add an Authors section at the end.
 
 Images:
 :   See [Images in Mmark](/syntax/images) for details, `ascii-art` images from a sub-figure are
     included.
 
 References and citations:
-:   Supported, a "Bibliography" section is added.
+:   Supported, a "Bibliography" section is added. Note that unlike XML2RFC, references for IDs and
+    RFCs *are not* automatically added.
 
 Code Block:
 :   Tabs are converted into four spaces.
@@ -270,6 +271,7 @@ An I-D needs to have a Title Block with the following items filled out:
 * `workgroup` - the workgroup the document is created for.
 * `keyword` - array with keywords (optional).
 * `author(s)` - define all the authors.
+* `contact(s)` - define all the contacts.
 * `date` - the date for this I-D/RFC.
 * `language` - the language for this document, this uses localized names for `Index`, `Footnotes`
   and `References`, etc. Valid values are from [BCP47](https://tools.ietf.org/html/bcp47). This
@@ -310,6 +312,21 @@ organization = "Mmark"
 ~~~
 
 An `#` acts as a comment in this block. TOML itself is specified [here](https://github.com/toml-lang/toml).
+
+If you want to define a `contact` do the following:
+
+~~~ toml
+[[contact]]
+initials="R.."
+surname="Gieben"
+fullname="R. (Miek) Gieben"
+  [contact.address]
+  email = "miek@miek.nl
+~~~
+
+You can then *reference* this contact using a *citation* via the `fullname`: `[@R. (Miek) Gieben]`.
+This also works when referencing an author of the I-D. Note just like authors, defining contacts
+needs to happen in the titleblock.
 
 ### Special Sections
 
@@ -405,6 +422,15 @@ Name    | Age
 Bob     | 27
 Alice   | 23
 Table: This is the table caption. {#ages}
+~~~
+
+Colspan is also supported, just repeat the pipe symbol after the cell:
+
+~~~
+Name    | Age
+--------|-----
+Bob     ||
+Alice   | 23
 ~~~
 
 ### Asides
@@ -538,6 +564,17 @@ citation index.
 A bibliography section is created by default if a `{backmatter}` is given, but you can suppress it
 by using the command line flag `-bibliography=false`.
 
+A non-suppressed reference to the *full name* of an author or contact will insert the referenced
+person as a `contact`. See <https://www.rfc-editor.org/materials/FAQ-xml2rfcv3.html#section-5.4>.
+
+#### Reference Text Suffices
+
+You can specify extra text after the citation using a comma: `[@RFC2535, section 5]`, see
+<https://www.rfc-editor.org/materials/FAQ-xml2rfcv3.html#name-how-do-i-link-to-multiple-se>.
+Currently only one such syntax is parsed and understood, you can reference a section within another
+document with `section <number>`, this is converted into a `section="<number>" sectionFormat="bare"`
+of the reference.
+
 ### XML References
 
 Any valid XML reference fragment found anywhere in the document, can be used as a citation reference.
@@ -564,6 +601,9 @@ The syntax of the XML reference element is defined in [RFC
 Note that for citing I-Ds and RFCs you *don't* need to include any XML, as Mmark will pull these
 automatically from their online location: or technically more correct: the xml2rfc post processor
 will do this.
+
+The newer `referencegroup` is also supported. No attempt to parse it is made, it's detected and
+included in the bibliography.
 
 ### Cross References
 
@@ -627,7 +667,7 @@ These are the changes from Mmark version 1:
 * Citations:
    * Suppressing a citation is done with `[@-ref]` (it was the reverse `-@` in v1), this is more consistent.
    * Multiple citations are allowed in one go, separated with a semicolons: `[@ref1; @ref2]`.
-   * A reference text suffix is allowed `[@ref, p. 23]`, the separation character is a comma; this
+   * A reference text suffix is allowed `[@ref, section 23]`, the separation character is a comma; this
      mirrors the pandoc syntax.
 * Indices: now just done with `(!item)`, marking one primary will be: `(!!item)`.
 * Code block callouts are now a renderer setting, not a [Block Level
