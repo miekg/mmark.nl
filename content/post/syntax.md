@@ -277,6 +277,7 @@ An I-D needs to have a Title Block with the following items filled out:
   and `References`, etc. Valid values are from [BCP47](https://tools.ietf.org/html/bcp47). This
   defaults to `en` (English). See the [current
   list](https://github.com/mmarkdown/mmark/blob/master/lang/lang.go).
+* `indexInclude` - set to true when you want to include an index (defaults to false).
 
 For a manual page the `title`, `area` and `workgroup` are mandatory, if `date` is not specified,
 "today" is assumed.
@@ -308,6 +309,7 @@ fullname="R. (Miek) Gieben"
 organization = "Mmark"
   [author.address]
   email = "miek@miek.nl"
+  emails = ["another@example.org"] # for when you need to speficy more than 1 email address
 %%%
 ~~~
 
@@ -327,6 +329,17 @@ fullname="R. (Miek) Gieben"
 You can then *reference* this contact using a *citation* via the `fullname`: `[@R. (Miek) Gieben]`.
 This also works when referencing an author of the I-D. Note just like authors, defining contacts
 needs to happen in the titleblock.
+
+To renders contacts just like the authors are rendered, they need to be a put directly after opening
+a new section in the *first* paragraph:
+
+~~~
+# Acknowledgements
+
+[@R. (Miek) Gieben] [@More Folk]
+
+Miek wrote ..., While More wrote ..
+~~~
 
 ### Special Sections
 
@@ -531,6 +544,8 @@ Total   | 50
 
 The pipe symbol (`|`) to mark columns does not need to be aligned. Each row must be on a single
 line.
+
+Headerless tables are also supported, just leave of the first line.
 
 ## Inline Elements
 
