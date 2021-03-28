@@ -261,11 +261,11 @@ An I-D needs to have a Title Block with the following items filled out:
 * `title` - the main title of the document.
 * `abbrev` - abbreviation of the title.
 * `updates/obsoletes` - array of integers.
-* `seriesInfo`, containing (this might change with the new *new* XMLv3 output)
-   * `name` - `RFC` or `Internet-Draft` or `DOI`
+* `seriesInfo`, containing:
+   * `name` - `RFC`, `Internet-Draft`, `DOI`, or `FYI`.
    * `value` - draft name or RFC number
    * `stream` - `IETF` (default), `IAB`, `IRTF` or `independent`.
-   * `status` - `standard`, `informational`, `experimental`, `bcp`, `fyi`, or `full-standard`.
+   * `status` - `standard`, `informational`, `experimental`, `bcp`, `historic`, or `full-standard`.
 * `ipr` - usually just set `trust200902`.
 * `area` - usually just `Internet`.
 * `workgroup` - the workgroup the document is created for.
@@ -555,6 +555,9 @@ Defining indices allows you to create an index. The define an index use the `(!i
 be added as well, with `(!item, subitem)`. To make `item` primary, use another `!`: `(!!item,
 subitem)`. If any index is defined the end of the document contains the list of indices. The
 `-index=false` flag suppresses this generation.
+
+An index may apply to an *entire* section. This can be entered (just like contacts) by having an
+index (or multiple),  and just the index, to be the first paragraph after a new section.
 
 ### Citations
 
