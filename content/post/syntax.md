@@ -164,9 +164,7 @@ Source code:
 Block Level Attributes:
 :   We use the attributes as specified in RFC 7991, e.g. to specify an empty list style use:
     `{empty="true"}` before the list. The renderer for this output format filters unknown attributes
-    away. The current list is to allow IDs (translated into 'anchor'), remove any `class=` and `style=`
-    attributes, so `{style="empty" empty="true"}`, will make a document both RFC 7991 and RFC 7749
-    compliant.
+    away.
 
 Footnotes:
 :   Are discarded from the final output, don't use them.
@@ -228,26 +226,14 @@ standard](https://tools.ietf.org/html/rfc7991). More on these below. The complet
 specified in [TOML](https://github.com/toml-lang/toml). Examples title blocks can be [found in the
 repository of Mmark](https://github.com/mmarkdown/mmark/tree/master/rfc).
 
-The title block itself needs three or more `%`'s (or `-`'s) at the start and end of the block. A
-minimal title block would look like this:
+The title block itself needs three or more `%`'s at the start and end of the block. A minimal title
+block would look like this:
 
 ~~~
 %%%
 title = "Foo Bar"
 %%%
 ~~~
-or
-
-~~~
----
-title = "Foo Bar"
----
-~~~
-
-The difference between the two is:
-
-* `%%%`: block is assumed to be encoded in TOML and *parsed*.
-* `---`: block is not parsed just outputted as-is again.
 
 #### Elements of the Title Block
 
@@ -391,6 +377,8 @@ Mmark support three document divisions, front matter, main matter and the back m
 automatically starts the front matter for you *if* the document has a title block. Switching
 divisions can be done with `{frontmatter}`, `{mainmatter}` and `{backmatter}`. This must be the only
 thing on the line.
+
+Note if there isn't a `{backmatter}` the bibliography will not be inserted.
 
 ### Captions
 
@@ -598,8 +586,11 @@ This is used in the following manner:
 * `[@RFC2525, 5]` -> sectionFormat="bare"
 
 `page`, `paragraph`, etc., might be supported in the future if these pop up in XML2RFC. Translation
-of 'see' and words like section is also not done yet. Also note these strings need to be literary
-typed as shown here (we may become more lenient in the future).
+of these strings _is_ supported for a few languages, `zie, sectie 5` (Dutch) is supported for
+instance.
+
+Also note these strings need to be literary typed as shown here (we may become more lenient in the
+future).
 
 ### XML References
 
