@@ -76,6 +76,14 @@ authors in an Internet-Draft.
 
 # XML2RFCv3 FAQ
 
+## What version of xml2rfc is supported?
+
+The latest version of xml2rfc is the supported version. As it currently stands, the xml2rfc
+*implementation* is the *spec*. Older versions may happen to work, with newer features unsupported,
+but this is not guaranteed.
+
+Latest version of xml2rfc can be found at [pypi](https://pypi.org/project/xml2rfc/).
+
 ## How do I get different kinds of lists?
 
 Use the standard markdown syntax for unordered, ordered and definition lists.
