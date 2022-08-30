@@ -74,6 +74,12 @@ Using the contact is done by referencing it: `[@David Addison]` (using the `full
 the reference is the *first* thing after a new paragraph it will be expanded like XML2RFC expands
 authors in an Internet-Draft.
 
+# Errors
+
+## Error: IDREF attribute target references an unknown ID "...", at None
+
+You likely forgot to open the back matter with `{backmatter}`.
+
 # XML2RFCv3 FAQ
 
 ## What version of xml2rfc is supported?
@@ -82,7 +88,8 @@ The latest version of xml2rfc is the supported version. As it currently stands, 
 *implementation* is the *spec*. Older versions may happen to work, with newer features unsupported,
 but this is not guaranteed.
 
-Latest version of xml2rfc can be found at [pypi](https://pypi.org/project/xml2rfc/).
+Latest version of xml2rfc can be found at [pypi](https://pypi.org/project/xml2rfc/). It can also
+be found on [Github](https://github.com/ietf-tools/xml2rfc/).
 
 ## How do I get different kinds of lists?
 
